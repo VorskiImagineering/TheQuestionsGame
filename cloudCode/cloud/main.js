@@ -6,6 +6,53 @@ Parse.Cloud.define("hello", function(request, response) {
 });
 
 
+Parse.Cloud.afterSave("Game", function (request) {
+  var game = request.object;
+
+
+  if (request.object.existed()) {
+    console.log('its not new game, returning');
+    return;
+  }
+
+  console.log('creating hat');
+
+  var Hat = Parse.Object.extend('GameHat'),
+    hat = new Hat(),
+    qsquery = new Parse.Query('QuestionsSet');
+
+  qsquery.get(game.get('questionsSet').id, {
+    success: function (qs) {
+      console.log('got qs for creating hat');
+      qs.relation('questions').query().find({
+        success: function (questions) {
+          console.log(questions);
+          console.log('got questions for creating hat');
+          hat.set('game', game);
+          if (questions.length !== 0) {
+            hat.set('questions', questions);
+          }
+          hat.save(null, {
+            success: function(newHat) {
+              console.log('New GameHat created with objectId: ' + newHat.id);
+            },
+            error: function(error) {
+              console.log(error);
+            }
+          });
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+});
+
+
 Parse.Cloud.define("getQuestion", function (request, response) {
   var userId = request.params.userId,
     gameId = request.params.gameId,
@@ -41,7 +88,7 @@ Parse.Cloud.define("getQuestion", function (request, response) {
                     console.log('getting game hat');
                     hat.relation('questions').query().find({
                       success: function (questions) {
-                        var OneQuestion = new Parse.Object.extend('OneQuestion'),
+                        var OneQuestion = Parse.Object.extend('OneQuestion'),
                           onequestion = new OneQuestion();
                         onequestion.set('game', game);
                         onequestion.set('user', user);
