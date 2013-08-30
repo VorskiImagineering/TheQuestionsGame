@@ -7,7 +7,11 @@ angular.module('tqgApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/:gid', {
+      .when('/:qs', {
+        templateUrl: 'views/anon.html',
+        controller: 'AnonCtrl'
+      })
+      .when('/game/:gid', {
         templateUrl: 'views/game.html',
         controller: 'GameCtrl'
       })
