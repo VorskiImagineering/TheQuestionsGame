@@ -161,7 +161,16 @@ Parse.Cloud.define("getAnonQuestion", function (request, response) {
                   // well done
                   var q = questions[Math.floor(Math.random() * questions.length)];
                   hat.relation('questions').remove(q);
-                  response.success(q);
+                  hat.save(null, {
+                    success: function (newHat) {
+                      console.log('New GameHat created with objectId: ' + newHat.id);
+                      response.success(q);
+                    },
+                    error: function (error) {
+                      console.log(error);
+                      response.success(q);
+                    }
+                  });
                 } else {
                   console.log('create questions...')
                   // no more queries, fill hat
