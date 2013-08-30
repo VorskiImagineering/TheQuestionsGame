@@ -7,6 +7,14 @@ angular.module('tqgApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/:gid', {
+        templateUrl: 'views/game.html',
+        controller: 'GameCtrl'
+      })
+      .when('/new/:gid', {
+        templateUrl: 'views/gameCreate.html',
+        controller: 'NewGameCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -22,6 +30,7 @@ Parse.initialize('Ek7zH223q2oVU53Hcq71x6ZBusHR4mrSyFbOIwli', 'PLHaBNxLzNHSqHdyeq
  * Initializa Facebook API
  */
 window.fbAsyncInit = function () {
+  console.log('init');
   Parse.FacebookUtils.init({
     appId: '148740492001273',
     channelUrl: '//thequestionsgame.parseapp.com/channel.html',

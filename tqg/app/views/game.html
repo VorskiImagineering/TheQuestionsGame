@@ -1,0 +1,23 @@
+<div class="hero-unit">
+    <div ng-switch="user.loggedIn()">
+        <div ng-switch-when="true">
+            <logout></logout>
+
+            <button ng-click="game.getGame(gameId)">refresh</button>
+
+            <span>id: {{ game.currentGame.get('gameId') }}</span>
+            <span>rule: {{ game.currentGame.get('rule') }}</span>
+            <span>questions: {{ game.currentGame.get('questionsSet') }}</span>
+
+            <ul class="players">
+                <li ng-repeat="player in game.currentPlayers">
+                    <img ng-src="https://graph.facebook.com/{{ player.get('authData').facebook.id }}/picture?width=70&height=70">
+                </li>
+            </ul>
+
+        </div>
+        <div ng-switch-when="false">
+            <login></login>
+        </div>
+    </div>
+</div>
