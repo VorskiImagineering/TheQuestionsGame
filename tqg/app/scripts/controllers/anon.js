@@ -1,7 +1,7 @@
 'use strict';
 
 var AnonCtrl = angular.module('tqgApp')
-  .controller('AnonCtrl', function ($scope, $routeParams, $location, User, Game) {
+  .controller('AnonCtrl', function ($scope, $routeParams) {
     var idx = $routeParams.qs;
 
     $scope.currentQuestion = '';
@@ -15,4 +15,4 @@ var AnonCtrl = angular.module('tqgApp')
     });
   });
 
-AnonCtrl.$inject = GameCtrl.$inject = ['$scope', '$routeParams', '$location', 'User', 'Game'];
+AnonCtrl.$inject = GameCtrl.$inject = ['$scope', '$routeParams'];
