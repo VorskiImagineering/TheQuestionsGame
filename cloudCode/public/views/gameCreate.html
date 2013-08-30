@@ -1,0 +1,32 @@
+<div class="hero-unit">
+    <div ng-switch="user.loggedIn()">
+        <div ng-switch-when="true">
+            <h2>Create game {{ gameId }}</h2>
+
+            <form class="form form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label for="questionsSetSwitcher">Questions Set</label>
+                    <select id="questionsSetSwitcher" required="required" ng-options="q.id as q.name for q in game.questionsChoices" ng-model="game.newGame.questionsSet"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ruleSwitcher">Rules</label>
+                    <select id="ruleSwitcher" required="required" ng-options="r.id as r.name for r in game.rolesChoices" ng-model="game.newGame.rule"></select>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-default" ng-click="game.saveGame(newGame)">create game</button>
+                    </div>
+                </div>
+
+            </form>
+
+            <logout></logout>
+        </div>
+        <div ng-switch-when="false">
+            <login></login>
+        </div>
+    </div>
+</div>
