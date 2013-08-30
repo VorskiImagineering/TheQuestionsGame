@@ -170,7 +170,9 @@ Parse.Cloud.define("getAnonQuestion", function (request, response) {
                       var randidx = Math.floor(Math.random() * questions.length),
                         q = questions[randidx];
                       questions.splice(randidx, 1);
-                      hat.relation('questions').add(questions);
+                      if (questions.length !== 0) {
+                        hat.relation('questions').add(questions);
+                      }
                       hat.save(null, {
                         success: function (newHat) {
                           console.log('New GameHat created with objectId: ' + newHat.id);
