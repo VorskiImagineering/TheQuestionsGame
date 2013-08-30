@@ -3,12 +3,14 @@
         <div ng-switch-when="true">
             <logout></logout>
 
-            <button ng-click="game.getGame(gameId)">refresh</button>
+            <button class="btn btn-default" ng-click="game.getGame(gameId)">refresh</button>
 
-            <span>id: {{ game.currentGame.get('gameId') }}</span>
-            <span>rule: {{ game.currentGame.get('rule') }}</span>
-            <span>questions: {{ game.currentGame.get('questionsSet') }}</span>
+            <h2>{{ game.currentGame.get('gameId') }}</h2>
 
+            <h3>question</h3>
+            <p>{{ game.currentQuestion.get('text') }}</p>
+
+            <h3>players</h3>
             <ul class="players">
                 <li ng-repeat="player in game.currentPlayers">
                     <img ng-src="https://graph.facebook.com/{{ player.get('authData').facebook.id }}/picture?width=70&height=70">

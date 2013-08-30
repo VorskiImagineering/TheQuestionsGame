@@ -7,6 +7,7 @@ var Game = angular.module('tqgApp')
 
     this.currentGame = null;
     this.currentPlayers = [];
+    this.currentQuestion = '';
 
     this.rolesChoices = [
       {
@@ -51,6 +52,20 @@ var Game = angular.module('tqgApp')
                 $rootScope.$apply(function () {
                   console.log(players);
                   self.currentPlayers = players;
+                });
+              },
+              error: function (error) {
+                console.error(error);
+              }
+            });
+
+            // get question for user
+            Parse.Cloud.run("getQuestion", {userId: Parse.User.current().id, gameId: games[0].id}, {
+              success: function (question) {
+                console.log('got question');
+                console.log(question);
+                $rootScope.$apply(function () {
+                  self.currentQuestion = question;
                 });
               },
               error: function (error) {
@@ -105,7 +120,7 @@ var Game = angular.module('tqgApp')
       error: function (error) {
         console.error(error);
       }
-    })
+    });
 
   });
 
