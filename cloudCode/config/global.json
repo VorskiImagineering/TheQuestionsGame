@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "The Questions Game": {
+            "applicationId": "Ek7zH223q2oVU53Hcq71x6ZBusHR4mrSyFbOIwli", 
+            "masterKey": "YnMYUgXoRJ3fGKc6RLmdHIUY976ZDAObEDoLmmXR"
+        }, 
+        "_default": {
+            "link": "The Questions Game"
+        }
+    }
+}
